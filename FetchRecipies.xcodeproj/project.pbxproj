@@ -14,6 +14,8 @@
 		01761FC52CD05E98001791B3 /* RecipeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01761FC42CD05E98001791B3 /* RecipeDataSource.swift */; };
 		01761FC92CD06014001791B3 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 01761FC82CD06014001791B3 /* YouTubePlayerKit */; };
 		01761FCB2CD0904E001791B3 /* CuisineFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01761FCA2CD0904E001791B3 /* CuisineFilterView.swift */; };
+		01761FD22CD1310B001791B3 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 01761FD12CD1310B001791B3 /* SDWebImageSwiftUI */; };
+		01761FD72CD136C7001791B3 /* RecipeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01761FD62CD136C7001791B3 /* RecipeListView.swift */; };
 		01F668D72CCEDA3600CFF5AB /* FetchRecipiesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F668D62CCEDA3600CFF5AB /* FetchRecipiesApp.swift */; };
 		01F668D92CCEDA3600CFF5AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F668D82CCEDA3600CFF5AB /* ContentView.swift */; };
 		01F668DD2CCEDA3900CFF5AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01F668DC2CCEDA3900CFF5AB /* Assets.xcassets */; };
@@ -22,7 +24,6 @@
 		01F668F72CCEDA3900CFF5AB /* FetchRecipiesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F668F62CCEDA3900CFF5AB /* FetchRecipiesUITestsLaunchTests.swift */; };
 		01F669042CD0035600CFF5AB /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F669032CD0035600CFF5AB /* Recipe.swift */; };
 		01F669082CD0045300CFF5AB /* RecipeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F669072CD0045300CFF5AB /* RecipeListViewModel.swift */; };
-		01F6690A2CD0047600CFF5AB /* RecipeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F669092CD0047600CFF5AB /* RecipeListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		01761FC22CD05E88001791B3 /* RecipeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeError.swift; sourceTree = "<group>"; };
 		01761FC42CD05E98001791B3 /* RecipeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDataSource.swift; sourceTree = "<group>"; };
 		01761FCA2CD0904E001791B3 /* CuisineFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuisineFilterView.swift; sourceTree = "<group>"; };
+		01761FD62CD136C7001791B3 /* RecipeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListView.swift; sourceTree = "<group>"; };
 		01F668D32CCEDA3600CFF5AB /* FetchRecipies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FetchRecipies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F668D62CCEDA3600CFF5AB /* FetchRecipiesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecipiesApp.swift; sourceTree = "<group>"; };
 		01F668D82CCEDA3600CFF5AB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,7 +63,6 @@
 		01F668F62CCEDA3900CFF5AB /* FetchRecipiesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecipiesUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		01F669032CD0035600CFF5AB /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		01F669072CD0045300CFF5AB /* RecipeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewModel.swift; sourceTree = "<group>"; };
-		01F669092CD0047600CFF5AB /* RecipeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01761FD22CD1310B001791B3 /* SDWebImageSwiftUI in Frameworks */,
 				01761FC92CD06014001791B3 /* YouTubePlayerKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,6 +104,8 @@
 		01761FBC2CD053F3001791B3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				01F668D82CCEDA3600CFF5AB /* ContentView.swift */,
+				01761FD62CD136C7001791B3 /* RecipeListView.swift */,
 				01761FBD2CD054F5001791B3 /* Components */,
 			);
 			path = Views;
@@ -124,6 +128,14 @@
 				01761FC42CD05E98001791B3 /* RecipeDataSource.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		01761FCC2CD12BBC001791B3 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				01F669072CD0045300CFF5AB /* RecipeListViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		01F668CA2CCEDA3600CFF5AB = {
@@ -149,12 +161,10 @@
 		01F668D52CCEDA3600CFF5AB /* FetchRecipies */ = {
 			isa = PBXGroup;
 			children = (
-				01761FBC2CD053F3001791B3 /* Views */,
-				01F6690B2CD011A500CFF5AB /* Models */,
 				01F668D62CCEDA3600CFF5AB /* FetchRecipiesApp.swift */,
-				01F668D82CCEDA3600CFF5AB /* ContentView.swift */,
-				01F669072CD0045300CFF5AB /* RecipeListViewModel.swift */,
-				01F669092CD0047600CFF5AB /* RecipeListView.swift */,
+				01761FBC2CD053F3001791B3 /* Views */,
+				01761FCC2CD12BBC001791B3 /* ViewModels */,
+				01F6690B2CD011A500CFF5AB /* Models */,
 				01F668DC2CCEDA3900CFF5AB /* Assets.xcassets */,
 				01F668DE2CCEDA3900CFF5AB /* FetchRecipies.entitlements */,
 				01761FBA2CD048E3001791B3 /* Preview Content */,
@@ -206,6 +216,7 @@
 			name = FetchRecipies;
 			packageProductDependencies = (
 				01761FC82CD06014001791B3 /* YouTubePlayerKit */,
+				01761FD12CD1310B001791B3 /* SDWebImageSwiftUI */,
 			);
 			productName = FetchRecipies;
 			productReference = 01F668D32CCEDA3600CFF5AB /* FetchRecipies.app */;
@@ -281,6 +292,7 @@
 			mainGroup = 01F668CA2CCEDA3600CFF5AB;
 			packageReferences = (
 				01761FC72CD06014001791B3 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
+				01761FD02CD1310B001791B3 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 01F668D42CCEDA3600CFF5AB /* Products */;
 			projectDirPath = "";
@@ -324,9 +336,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01F6690A2CD0047600CFF5AB /* RecipeListView.swift in Sources */,
 				01761FC52CD05E98001791B3 /* RecipeDataSource.swift in Sources */,
 				01761FBF2CD05E42001791B3 /* ErrorView.swift in Sources */,
+				01761FD72CD136C7001791B3 /* RecipeListView.swift in Sources */,
 				01F668D92CCEDA3600CFF5AB /* ContentView.swift in Sources */,
 				01F668D72CCEDA3600CFF5AB /* FetchRecipiesApp.swift in Sources */,
 				01F669082CD0045300CFF5AB /* RecipeListViewModel.swift in Sources */,
@@ -692,6 +704,14 @@
 				minimumVersion = 1.9.0;
 			};
 		};
+		01761FD02CD1310B001791B3 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -699,6 +719,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 01761FC72CD06014001791B3 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */;
 			productName = YouTubePlayerKit;
+		};
+		01761FD12CD1310B001791B3 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01761FD02CD1310B001791B3 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

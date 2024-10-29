@@ -8,11 +8,8 @@
 import SwiftUI
 import Combine
 
-import SwiftUI
-import Combine
-
 class RecipeListViewModel: ObservableObject {
-    @Published var allRecipes: [Recipe] = []
+    @Published var allRecipes: [Recipe] = [] // fetched recipes
     @Published var recipes: [Recipe] = [] // Filtered recipes
     @Published var error: RecipeError?
     @Published var selectedCuisines: Set<String> = []

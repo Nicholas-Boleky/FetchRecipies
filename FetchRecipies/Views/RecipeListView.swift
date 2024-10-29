@@ -7,6 +7,7 @@
 
 import SwiftUI
 import YouTubePlayerKit
+import SDWebImageSwiftUI
 
 struct RecipeListView: View {
     @StateObject private var viewModel = RecipeListViewModel()
@@ -59,20 +60,27 @@ struct RecipeListView: View {
 struct RecipeRow: View {
     let recipe: Recipe
     @State private var isExpanded = false
-    
+
     var body: some View {
         VStack(alignment: .leading) {
-            // Existing header code
+            // Header section
             HStack {
-                AsyncImage(url: recipe.photoUrlSmall) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50, height: 50)
+                WebImage(url: recipe.photoUrlSmall) { image in
+                    image.resizable() // Control layout like SwiftUI.AsyncImage, you must use this modifier or the view will use the image bitmap size
                 } placeholder: {
-                    ProgressView()
-                        .frame(width: 50, height: 50)
+                        Rectangle().foregroundColor(.gray)
                 }
+                // Supports options and context, like `.delayPlaceholder` to show placeholder only when error
+                .onSuccess { image, data, cacheType in
+                    // Success
+                    // Note: Data exist only when queried from disk cache or network. Use `.queryMemoryData` if you really need data
+                }
+                .indicator(.activity) // Activity Indicator
+                .transition(.fade(duration: 0.5)) // Fade Transition with duration
+                .scaledToFit()
+                .frame(height: 50)
+                .scaledToFit()
+                
                 VStack(alignment: .leading) {
                     Text(recipe.name)
                         .font(.headline)
