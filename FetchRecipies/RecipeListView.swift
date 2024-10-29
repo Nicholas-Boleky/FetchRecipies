@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import YouTubePlayerKit
 
 struct RecipeListView: View {
     @StateObject private var viewModel = RecipeListViewModel()
@@ -24,43 +25,75 @@ struct RecipeRow: View {
 
     var body: some View {
         VStack(alignment: .leading) {
+            // Existing header code
             HStack {
                 AsyncImage(url: recipe.photoUrlSmall) { image in
-                    image.resizable().scaledToFit().frame(width: 50, height: 50)
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
                 } placeholder: {
                     ProgressView()
+                        .frame(width: 50, height: 50)
                 }
                 VStack(alignment: .leading) {
-                    Text(recipe.name).font(.headline)
-                    Text(recipe.cuisine).font(.subheadline).foregroundColor(.gray)
+                    Text(recipe.name)
+                        .font(.headline)
+                    Text(recipe.cuisine)
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
                 }
                 Spacer()
             }
+            .onTapGesture {
+                withAnimation {
+                    isExpanded.toggle()
+                }
+            }
+
+            // Expanded content
             if isExpanded {
                 Divider()
                 VStack(alignment: .leading, spacing: 8) {
+                    // Source URL
                     if let sourceUrl = recipe.sourceUrl {
-                        Text("Source: \(sourceUrl.absoluteString)")
+                        //Text("Source: \(sourceUrl.absoluteString)")
+                        Link("Click here for full  recipe", destination: sourceUrl)
                             .font(.footnote)
-                            .foregroundColor(.blue)
                     }
-                    if let youtubeUrl = recipe.youtubeUrl {
-                        Text("YouTube: \(youtubeUrl.absoluteString)")
+
+                    // YouTube Video
+                    if let videoID = recipe.youtubeVideoID {
+                        // Create YouTubePlayer instance
+                        let youtubePlayer = YouTubePlayer(source: .video(id: videoID))
+
+                        // Display the player
+                        YouTubePlayerView(youtubePlayer) { state in
+                            switch state {
+                            case .idle:
+                                ProgressView()
+                            case .ready:
+                                EmptyView()
+                            case .error(_):
+                                //The player already displays an error here if the video is unavailable so another EmptyView is used.
+                                EmptyView()
+                            }
+                        }
+                        .frame(height: 200) // Adjust height as needed
+                        .cornerRadius(8)
+                    } else {
+                        Text("No video available.")
                             .font(.footnote)
-                            .foregroundColor(.blue)
+                            .foregroundColor(.gray)
                     }
                 }
                 .padding(.top, 4)
             }
         }
         .padding()
-        .background(Color.white)
+        .background(Color(.systemBackground))
         .cornerRadius(8)
         .shadow(radius: 2)
-        .onTapGesture {
-            withAnimation {
-                isExpanded.toggle()
-            }
-        }
     }
 }
+

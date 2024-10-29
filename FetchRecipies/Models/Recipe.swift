@@ -27,3 +27,23 @@ struct Recipe: Identifiable, Decodable {
         case youtubeUrl = "youtube_url"
     }
 }
+
+extension Recipe {
+    var youtubeVideoID: String? {
+        guard let youtubeUrl = youtubeUrl else { return nil }
+        let urlString = youtubeUrl.absoluteString
+
+        // Handle standard YouTube URLs
+        if let urlComponents = URLComponents(string: urlString),
+           urlComponents.host?.contains("youtube.com") == true {
+            return urlComponents.queryItems?.first(where: { $0.name == "v" })?.value
+        }
+
+        // Handle shortened YouTube URLs (youtu.be)
+        if youtubeUrl.host == "youtu.be" {
+            return youtubeUrl.lastPathComponent
+        }
+
+        return nil
+    }
+}
