@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecipeListView: View {
-    @StateObject private var viewModel = RecipeViewModel()
+    @StateObject private var viewModel = RecipeListViewModel()
     
     var body: some View {
         List(viewModel.recipes) { recipe in
@@ -39,12 +39,16 @@ struct RecipeRow: View {
             if isExpanded {
                 Divider()
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Source: \(recipe.sourceUrl.absoluteString)")
-                        .font(.footnote)
-                        .foregroundColor(.blue)
-                    Text("YouTube: \(recipe.youtubeUrl.absoluteString)")
-                        .font(.footnote)
-                        .foregroundColor(.blue)
+                    if let sourceUrl = recipe.sourceUrl {
+                        Text("Source: \(sourceUrl.absoluteString)")
+                            .font(.footnote)
+                            .foregroundColor(.blue)
+                    }
+                    if let youtubeUrl = recipe.youtubeUrl {
+                        Text("YouTube: \(youtubeUrl.absoluteString)")
+                            .font(.footnote)
+                            .foregroundColor(.blue)
+                    }
                 }
                 .padding(.top, 4)
             }

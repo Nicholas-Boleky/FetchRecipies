@@ -8,25 +8,62 @@
 import SwiftUI
 import Combine
 
-class RecipeViewModel: ObservableObject {
+import SwiftUI
+import Combine
+
+class RecipeListViewModel: ObservableObject {
     @Published var recipes: [Recipe] = []
-    private var cancellables = Set<AnyCancellable>()
+    @Published var error: RecipeError?
     
-    init() {
+    private var cancellables = Set<AnyCancellable>()
+    private var dataSource: RecipeDataSource
+    
+    init(dataSource: RecipeDataSource = .allRecipes) {
+        self.dataSource = dataSource
         fetchRecipes()
     }
     
     func fetchRecipes() {
-        // Temporary mock data
-        let mockData = Recipe(
-            backendID: "0c6ca6e7-e32a-4053-b824-1dbf749910d8",
-            cuisine: "Malaysian",
-            name: "Apam Balik",
-            photoUrlLarge: URL(string: "https://d3jbb8n5wk0qxi.cloudfront.net/photos/b9ab0071-b281-4bee-b361-ec340d405320/large.jpg")!,
-            photoUrlSmall: URL(string: "https://d3jbb8n5wk0qxi.cloudfront.net/photos/b9ab0071-b281-4bee-b361-ec340d405320/small.jpg")!,
-            sourceUrl: URL(string: "https://www.nyonyacooking.com/recipes/apam-balik~SJ5WuvsDf9WQ")!,
-            youtubeUrl: URL(string: "https://www.youtube.com/watch?v=6R8ffRRJcrg")!
-        )
-        self.recipes = [mockData]
+        let url = dataSource.url
+        
+        URLSession.shared.dataTaskPublisher(for: url)
+            .tryMap { data, response -> Data in
+                if let httpResponse = response as? HTTPURLResponse,
+                   !(200...299).contains(httpResponse.statusCode) {
+                    throw RecipeError.networkError(NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: "Server error"]))
+                }
+                return data
+            }
+            .decode(type: [String: [Recipe]].self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                if case .failure(let error) = completion {
+                    if let decodingError = error as? DecodingError {
+                        self?.error = .malformedData
+                    } else if let recipeError = error as? RecipeError {
+                        self?.error = recipeError
+                    } else {
+                        self?.error = .networkError(error)
+                    }
+                    self?.recipes = []
+                }
+            } receiveValue: { [weak self] data in
+                if let recipes = data["recipes"], !recipes.isEmpty {
+                    self?.recipes = recipes
+                    self?.error = nil
+                } else if data["recipes"] != nil {
+                    self?.recipes = []
+                    self?.error = .emptyData
+                } else {
+                    self?.recipes = []
+                    self?.error = .malformedData
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    func updateDataSource(to newDataSource: RecipeDataSource) {
+        self.dataSource = newDataSource
+        fetchRecipes()
     }
 }

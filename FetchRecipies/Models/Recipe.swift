@@ -15,8 +15,8 @@ struct Recipe: Identifiable, Decodable {
     let name: String
     let photoUrlLarge: URL
     let photoUrlSmall: URL
-    let sourceUrl: URL
-    let youtubeUrl: URL
+    let sourceUrl: URL? //some recipes do not have a source_url
+    let youtubeUrl: URL? //some recipes do not have a youtube_url
     
     private enum CodingKeys: String, CodingKey {
         case cuisine, name
