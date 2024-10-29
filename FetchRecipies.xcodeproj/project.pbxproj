@@ -16,9 +16,10 @@
 		01761FCB2CD0904E001791B3 /* CuisineFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01761FCA2CD0904E001791B3 /* CuisineFilterView.swift */; };
 		01761FD22CD1310B001791B3 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 01761FD12CD1310B001791B3 /* SDWebImageSwiftUI */; };
 		01761FD72CD136C7001791B3 /* RecipeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01761FD62CD136C7001791B3 /* RecipeListView.swift */; };
+		01761FD92CD19C86001791B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01761FD82CD19C86001791B3 /* Assets.xcassets */; };
+		01761FDD2CD19E6F001791B3 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01761FDB2CD19E62001791B3 /* WebKit.framework */; };
 		01F668D72CCEDA3600CFF5AB /* FetchRecipiesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F668D62CCEDA3600CFF5AB /* FetchRecipiesApp.swift */; };
 		01F668D92CCEDA3600CFF5AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F668D82CCEDA3600CFF5AB /* ContentView.swift */; };
-		01F668DD2CCEDA3900CFF5AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01F668DC2CCEDA3900CFF5AB /* Assets.xcassets */; };
 		01F668EB2CCEDA3900CFF5AB /* FetchRecipiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F668EA2CCEDA3900CFF5AB /* FetchRecipiesTests.swift */; };
 		01F668F52CCEDA3900CFF5AB /* FetchRecipiesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F668F42CCEDA3900CFF5AB /* FetchRecipiesUITests.swift */; };
 		01F668F72CCEDA3900CFF5AB /* FetchRecipiesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F668F62CCEDA3900CFF5AB /* FetchRecipiesUITestsLaunchTests.swift */; };
@@ -51,10 +52,11 @@
 		01761FC42CD05E98001791B3 /* RecipeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDataSource.swift; sourceTree = "<group>"; };
 		01761FCA2CD0904E001791B3 /* CuisineFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuisineFilterView.swift; sourceTree = "<group>"; };
 		01761FD62CD136C7001791B3 /* RecipeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListView.swift; sourceTree = "<group>"; };
+		01761FD82CD19C86001791B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../testapp/testapp/Assets.xcassets; sourceTree = "<group>"; };
+		01761FDB2CD19E62001791B3 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.5.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
 		01F668D32CCEDA3600CFF5AB /* FetchRecipies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FetchRecipies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F668D62CCEDA3600CFF5AB /* FetchRecipiesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecipiesApp.swift; sourceTree = "<group>"; };
 		01F668D82CCEDA3600CFF5AB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		01F668DC2CCEDA3900CFF5AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01F668DE2CCEDA3900CFF5AB /* FetchRecipies.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FetchRecipies.entitlements; sourceTree = "<group>"; };
 		01F668E62CCEDA3900CFF5AB /* FetchRecipiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FetchRecipiesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F668EA2CCEDA3900CFF5AB /* FetchRecipiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecipiesTests.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			files = (
 				01761FD22CD1310B001791B3 /* SDWebImageSwiftUI in Frameworks */,
 				01761FC92CD06014001791B3 /* YouTubePlayerKit in Frameworks */,
+				01761FDD2CD19E6F001791B3 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +141,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		01761FDA2CD19E62001791B3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				01761FDB2CD19E62001791B3 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		01F668CA2CCEDA3600CFF5AB = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +156,7 @@
 				01F668E92CCEDA3900CFF5AB /* FetchRecipiesTests */,
 				01F668F32CCEDA3900CFF5AB /* FetchRecipiesUITests */,
 				01F668D42CCEDA3600CFF5AB /* Products */,
+				01761FDA2CD19E62001791B3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -165,8 +177,8 @@
 				01761FBC2CD053F3001791B3 /* Views */,
 				01761FCC2CD12BBC001791B3 /* ViewModels */,
 				01F6690B2CD011A500CFF5AB /* Models */,
-				01F668DC2CCEDA3900CFF5AB /* Assets.xcassets */,
 				01F668DE2CCEDA3900CFF5AB /* FetchRecipies.entitlements */,
+				01761FD82CD19C86001791B3 /* Assets.xcassets */,
 				01761FBA2CD048E3001791B3 /* Preview Content */,
 			);
 			path = FetchRecipies;
@@ -310,8 +322,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01761FD92CD19C86001791B3 /* Assets.xcassets in Resources */,
 				01761FBB2CD048E3001791B3 /* Preview Assets.xcassets in Resources */,
-				01F668DD2CCEDA3900CFF5AB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -42,7 +42,8 @@ struct RecipeListView: View {
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                         } else {
                             LazyVStack {
-                                ForEach(viewModel.recipes) { recipe in
+                                //Using ForEach instead of List because it is more predictable with the expanding size I am using for the video player and full recipe link.
+                                ForEach(viewModel.recipes, id: \.id) { recipe in
                                     RecipeRow(recipe: recipe)
                                         .padding(.horizontal)
                                         .padding(.bottom, 8)
@@ -94,11 +95,19 @@ struct RecipeRow: View {
                         .foregroundColor(.gray)
                 }
                 Spacer()
-            }
-            .onTapGesture {
-                withAnimation {
-                    isExpanded.toggle()
+                
+                Button(action: {
+                    withAnimation {
+                        isExpanded.toggle()
+                    }
+                }) {
+                    Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+                        .font(.system(size: 20))
+                        .foregroundColor(.gray)
+                        .frame(width: 44, height: 44) // min tap size https://developer.apple.com/design/human-interface-guidelines/buttons
+                        .contentShape(Rectangle())
                 }
+                .buttonStyle(PlainButtonStyle())
             }
             
             // Expanded content
@@ -108,7 +117,7 @@ struct RecipeRow: View {
                     // Source URL
                     if let sourceUrl = recipe.sourceUrl {
                         //Text("Source: \(sourceUrl.absoluteString)")
-                        Link("Click here for full  recipe", destination: sourceUrl)
+                        Link("Click here for full recipe", destination: sourceUrl)
                             .font(.footnote)
                     }
                     
@@ -125,8 +134,11 @@ struct RecipeRow: View {
                             case .ready:
                                 EmptyView()
                             case .error(_):
-                                //The player already displays an error here if the video is unavailable so another EmptyView is used.
-                                EmptyView()
+                                Image("brokenYTLink")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: 200)
+                                    .cornerRadius(8)
                             }
                         }
                         .frame(height: 200) // Adjust height as needed
