@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Recipe: Identifiable, Decodable {
+struct Recipe: Identifiable, Decodable, Equatable {
     // we will still generate a unique ID here on the mobile side mostly because I am not sure how the UUIDs on the backend are created/handled and if someone enters a duplicate by error it could cause issues for us on mobile.
     let id = UUID()  // Generate a unique identifier
     let backendID: String
@@ -32,18 +32,18 @@ extension Recipe {
     var youtubeVideoID: String? {
         guard let youtubeUrl = youtubeUrl else { return nil }
         let urlString = youtubeUrl.absoluteString
-
+        
         // Handle standard YouTube URLs
         if let urlComponents = URLComponents(string: urlString),
            urlComponents.host?.contains("youtube.com") == true {
             return urlComponents.queryItems?.first(where: { $0.name == "v" })?.value
         }
-
+        
         // Handle shortened YouTube URLs (youtu.be)
         if youtubeUrl.host == "youtu.be" {
             return youtubeUrl.lastPathComponent
         }
-
+        
         return nil
     }
 }

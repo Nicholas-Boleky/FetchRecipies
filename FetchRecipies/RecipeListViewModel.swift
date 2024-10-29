@@ -12,8 +12,11 @@ import SwiftUI
 import Combine
 
 class RecipeListViewModel: ObservableObject {
-    @Published var recipes: [Recipe] = []
+    @Published var allRecipes: [Recipe] = []
+    @Published var recipes: [Recipe] = [] // Filtered recipes
     @Published var error: RecipeError?
+    @Published var selectedCuisines: Set<String> = []
+    @Published var cuisineTypes: [String] = []
     
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: RecipeDataSource
@@ -45,16 +48,21 @@ class RecipeListViewModel: ObservableObject {
                     } else {
                         self?.error = .networkError(error)
                     }
+                    self?.allRecipes = []
                     self?.recipes = []
                 }
             } receiveValue: { [weak self] data in
                 if let recipes = data["recipes"], !recipes.isEmpty {
-                    self?.recipes = recipes
+                    self?.allRecipes = recipes
                     self?.error = nil
+                    self?.extractCuisineTypes()
+                    self?.applyFilters()
                 } else if data["recipes"] != nil {
+                    self?.allRecipes = []
                     self?.recipes = []
                     self?.error = .emptyData
                 } else {
+                    self?.allRecipes = []
                     self?.recipes = []
                     self?.error = .malformedData
                 }
@@ -66,4 +74,27 @@ class RecipeListViewModel: ObservableObject {
         self.dataSource = newDataSource
         fetchRecipes()
     }
+    
+    private func extractCuisineTypes() {
+        let cuisines = allRecipes.map { $0.cuisine }
+        self.cuisineTypes = Array(Set(cuisines)).sorted()
+    }
+    
+    func toggleCuisine(_ cuisine: String) {
+        if selectedCuisines.contains(cuisine) {
+            selectedCuisines.remove(cuisine)
+        } else {
+            selectedCuisines.insert(cuisine)
+        }
+        applyFilters()
+    }
+    
+    private func applyFilters() {
+        if selectedCuisines.isEmpty {
+            recipes = allRecipes
+        } else {
+            recipes = allRecipes.filter { selectedCuisines.contains($0.cuisine) }
+        }
+    }
 }
+

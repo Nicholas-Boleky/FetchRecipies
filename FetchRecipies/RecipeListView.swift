@@ -10,19 +10,56 @@ import YouTubePlayerKit
 
 struct RecipeListView: View {
     @StateObject private var viewModel = RecipeListViewModel()
+    @State private var selectedDataSource: RecipeDataSource = .allRecipes
     
     var body: some View {
-        List(viewModel.recipes) { recipe in
-            RecipeRow(recipe: recipe)
+        NavigationView {
+            VStack {
+                // Picker for data source selection TODO: Update to display in debug mode only
+                Picker("Data Source", selection: $selectedDataSource) {
+                    ForEach(RecipeDataSource.allCases, id: \.self) { source in
+                        Text(source.displayName).tag(source)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding()
+                .onChange(of: selectedDataSource) { newValue in
+                    viewModel.updateDataSource(to: newValue)
+                }
+                
+                //Horizontally scrollable tiles for filtering cuisine
+                CuisineFilterView(viewModel: viewModel)
+                
+                // Main content
+                Group {
+                    if let error = viewModel.error {
+                        ErrorView(error: error, retryAction: {
+                            viewModel.fetchRecipes()
+                        })
+                    } else if viewModel.recipes.isEmpty {
+                        EmptyStateView()
+                    } else {
+                        List(viewModel.recipes) { recipe in
+                            RecipeRow(recipe: recipe)
+                        }
+                        .listStyle(PlainListStyle())
+                        .animation(.default, value: viewModel.recipes)
+                    }
+                }
+                .navigationTitle("Recipes")
+                .refreshable {
+                    viewModel.fetchRecipes()
+                }
+            }
         }
-        .listStyle(PlainListStyle())
     }
 }
+
 
 struct RecipeRow: View {
     let recipe: Recipe
     @State private var isExpanded = false
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             // Existing header code
@@ -50,7 +87,7 @@ struct RecipeRow: View {
                     isExpanded.toggle()
                 }
             }
-
+            
             // Expanded content
             if isExpanded {
                 Divider()
@@ -61,12 +98,12 @@ struct RecipeRow: View {
                         Link("Click here for full  recipe", destination: sourceUrl)
                             .font(.footnote)
                     }
-
+                    
                     // YouTube Video
                     if let videoID = recipe.youtubeVideoID {
                         // Create YouTubePlayer instance
                         let youtubePlayer = YouTubePlayer(source: .video(id: videoID))
-
+                        
                         // Display the player
                         YouTubePlayerView(youtubePlayer) { state in
                             switch state {
