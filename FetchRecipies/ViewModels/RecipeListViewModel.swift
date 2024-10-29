@@ -14,14 +14,19 @@ class RecipeListViewModel: ObservableObject {
     @Published var error: RecipeError?
     @Published var selectedCuisines: Set<String> = []
     @Published var cuisineTypes: [String] = []
+    
+#if DEBUG
     @Published var selectedDataSource: RecipeDataSource
+#endif
     
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: RecipeDataSource
     
     init(dataSource: RecipeDataSource = .allRecipes) {
         self.dataSource = dataSource
+#if DEBUG
         self.selectedDataSource = dataSource
+#endif
         fetchRecipes()
     }
     
@@ -47,8 +52,7 @@ class RecipeListViewModel: ObservableObject {
                     } else {
                         self?.error = .networkError(error)
                     }
-                    self?.allRecipes = []
-                    self?.recipes = []
+                    self?.clearRecipes()
                 }
             } receiveValue: { [weak self] data in
                 if let recipes = data["recipes"], !recipes.isEmpty {
@@ -57,12 +61,10 @@ class RecipeListViewModel: ObservableObject {
                     self?.extractCuisineTypes()
                     self?.applyFilters()
                 } else if data["recipes"] != nil {
-                    self?.allRecipes = []
-                    self?.recipes = []
+                    self?.clearRecipes()
                     self?.error = .emptyData
                 } else {
-                    self?.allRecipes = []
-                    self?.recipes = []
+                    self?.clearRecipes()
                     self?.error = .malformedData
                 }
             }
@@ -70,7 +72,9 @@ class RecipeListViewModel: ObservableObject {
     }
     
     func applySelectedDataSource() {
+#if DEBUG
         self.dataSource = self.selectedDataSource
+#endif
         fetchRecipes()
     }
     
@@ -94,5 +98,12 @@ class RecipeListViewModel: ObservableObject {
         } else {
             recipes = allRecipes.filter { selectedCuisines.contains($0.cuisine) }
         }
+    }
+    
+    func clearRecipes() {
+        allRecipes = []
+        recipes = []
+        cuisineTypes = []
+        selectedCuisines = []
     }
 }

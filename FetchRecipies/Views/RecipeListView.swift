@@ -16,6 +16,7 @@ struct RecipeListView: View {
         NavigationView {
             ScrollView {
                 VStack {
+                    #if DEBUG
                     // Picker for data source selection
                     Picker("Data Source", selection: $viewModel.selectedDataSource) {
                         ForEach(RecipeDataSource.allCases, id: \.self) { source in
@@ -24,6 +25,7 @@ struct RecipeListView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .padding()
+                    #endif
                     
                     // Cuisine Filter View
                     CuisineFilterView(viewModel: viewModel)
