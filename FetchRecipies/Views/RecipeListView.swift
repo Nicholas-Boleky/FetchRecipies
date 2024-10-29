@@ -11,46 +11,49 @@ import SDWebImageSwiftUI
 
 struct RecipeListView: View {
     @StateObject private var viewModel = RecipeListViewModel()
-    @State private var selectedDataSource: RecipeDataSource = .allRecipes
     
     var body: some View {
         NavigationView {
-            VStack {
-                // Picker for data source selection TODO: Update to display in debug mode only
-                Picker("Data Source", selection: $selectedDataSource) {
-                    ForEach(RecipeDataSource.allCases, id: \.self) { source in
-                        Text(source.displayName).tag(source)
-                    }
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding()
-                .onChange(of: selectedDataSource) { newValue in
-                    viewModel.updateDataSource(to: newValue)
-                }
-                
-                //Horizontally scrollable tiles for filtering cuisine
-                CuisineFilterView(viewModel: viewModel)
-                
-                // Main content
-                Group {
-                    if let error = viewModel.error {
-                        ErrorView(error: error, retryAction: {
-                            viewModel.fetchRecipes()
-                        })
-                    } else if viewModel.recipes.isEmpty {
-                        EmptyStateView()
-                    } else {
-                        List(viewModel.recipes) { recipe in
-                            RecipeRow(recipe: recipe)
+            ScrollView {
+                VStack {
+                    // Picker for data source selection
+                    Picker("Data Source", selection: $viewModel.selectedDataSource) {
+                        ForEach(RecipeDataSource.allCases, id: \.self) { source in
+                            Text(source.displayName).tag(source)
                         }
-                        .listStyle(PlainListStyle())
-                        .animation(.default, value: viewModel.recipes)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding()
+                    
+                    // Cuisine Filter View
+                    CuisineFilterView(viewModel: viewModel)
+                    
+                    // Main content
+                    Group {
+                        if let error = viewModel.error {
+                            ErrorView(error: error, retryAction: {
+                                viewModel.applySelectedDataSource()
+                            })
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        } else if viewModel.recipes.isEmpty {
+                            EmptyStateView()
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        } else {
+                            LazyVStack {
+                                ForEach(viewModel.recipes) { recipe in
+                                    RecipeRow(recipe: recipe)
+                                        .padding(.horizontal)
+                                        .padding(.bottom, 8)
+                                }
+                            }
+                        }
                     }
                 }
-                .navigationTitle("Recipes")
-                .refreshable {
-                    viewModel.fetchRecipes()
-                }
+                .frame(maxWidth: .infinity)
+            }
+            .navigationTitle("Recipes")
+            .refreshable {
+                viewModel.applySelectedDataSource()
             }
         }
     }
@@ -60,7 +63,7 @@ struct RecipeListView: View {
 struct RecipeRow: View {
     let recipe: Recipe
     @State private var isExpanded = false
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             // Header section
@@ -68,7 +71,7 @@ struct RecipeRow: View {
                 WebImage(url: recipe.photoUrlSmall) { image in
                     image.resizable() // Control layout like SwiftUI.AsyncImage, you must use this modifier or the view will use the image bitmap size
                 } placeholder: {
-                        Rectangle().foregroundColor(.gray)
+                    Rectangle().foregroundColor(.gray)
                 }
                 // Supports options and context, like `.delayPlaceholder` to show placeholder only when error
                 .onSuccess { image, data, cacheType in

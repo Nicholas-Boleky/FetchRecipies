@@ -25,5 +25,6 @@ struct ErrorView: View {
             .padding(.top)
         }
         .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

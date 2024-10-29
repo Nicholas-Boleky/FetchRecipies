@@ -9,17 +9,19 @@ import SwiftUI
 import Combine
 
 class RecipeListViewModel: ObservableObject {
-    @Published var allRecipes: [Recipe] = [] // fetched recipes
+    @Published var allRecipes: [Recipe] = []
     @Published var recipes: [Recipe] = [] // Filtered recipes
     @Published var error: RecipeError?
     @Published var selectedCuisines: Set<String> = []
     @Published var cuisineTypes: [String] = []
+    @Published var selectedDataSource: RecipeDataSource
     
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: RecipeDataSource
     
     init(dataSource: RecipeDataSource = .allRecipes) {
         self.dataSource = dataSource
+        self.selectedDataSource = dataSource
         fetchRecipes()
     }
     
@@ -67,8 +69,8 @@ class RecipeListViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    func updateDataSource(to newDataSource: RecipeDataSource) {
-        self.dataSource = newDataSource
+    func applySelectedDataSource() {
+        self.dataSource = self.selectedDataSource
         fetchRecipes()
     }
     
@@ -94,4 +96,3 @@ class RecipeListViewModel: ObservableObject {
         }
     }
 }
-
