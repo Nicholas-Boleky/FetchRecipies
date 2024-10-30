@@ -55,7 +55,7 @@
 		01761FC22CD05E88001791B3 /* RecipeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeError.swift; sourceTree = "<group>"; };
 		01761FC42CD05E98001791B3 /* RecipeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDataSource.swift; sourceTree = "<group>"; };
 		01761FD62CD136C7001791B3 /* RecipeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListView.swift; sourceTree = "<group>"; };
-		01761FD82CD19C86001791B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../testapp/testapp/Assets.xcassets; sourceTree = "<group>"; };
+		01761FD82CD19C86001791B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01761FDB2CD19E62001791B3 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.5.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
 		01761FE02CD1AD83001791B3 /* RecipeSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSearchBar.swift; sourceTree = "<group>"; };
 		01761FE22CD1B08C001791B3 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 		017620242CD2AD06001791B3 /* UrlShareButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlShareButton.swift; sourceTree = "<group>"; };
 		01F668D32CCEDA3600CFF5AB /* FetchRecipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FetchRecipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F668D62CCEDA3600CFF5AB /* FetchRecipiesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecipiesApp.swift; sourceTree = "<group>"; };
-		01F668DE2CCEDA3900CFF5AB /* FetchRecipies.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FetchRecipies.entitlements; sourceTree = "<group>"; };
+		01F668DE2CCEDA3900CFF5AB /* FetchRecipes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FetchRecipes.entitlements; sourceTree = "<group>"; };
 		01F668E62CCEDA3900CFF5AB /* FetchRecipesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FetchRecipesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F668EA2CCEDA3900CFF5AB /* FetchRecipiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecipiesTests.swift; sourceTree = "<group>"; };
 		01F668F02CCEDA3900CFF5AB /* FetchRecipesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FetchRecipesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,8 +108,7 @@
 			children = (
 				01761FB92CD048E3001791B3 /* Preview Assets.xcassets */,
 			);
-			name = "Preview Content";
-			path = "../../testapp/testapp/Preview Content";
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		01761FBC2CD053F3001791B3 /* Views */ = {
@@ -198,7 +197,7 @@
 				01761FBC2CD053F3001791B3 /* Views */,
 				01761FCC2CD12BBC001791B3 /* ViewModels */,
 				01761FE42CD29F0E001791B3 /* Services */,
-				01F668DE2CCEDA3900CFF5AB /* FetchRecipies.entitlements */,
+				01F668DE2CCEDA3900CFF5AB /* FetchRecipes.entitlements */,
 				01761FD82CD19C86001791B3 /* Assets.xcassets */,
 				01761FBA2CD048E3001791B3 /* Preview Content */,
 			);
