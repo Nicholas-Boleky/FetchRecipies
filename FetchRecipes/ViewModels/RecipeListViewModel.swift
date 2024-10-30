@@ -96,7 +96,9 @@ class RecipeListViewModel: ObservableObject {
     }
     
     func applySelectedDataSource() {
-        self.dataSource = self.selectedDataSource
+        #if DEBUG
+        self.dataSource = self.selectedDataSource //This only exists in debug
+        #endif
         fetchRecipes()
     }
     
