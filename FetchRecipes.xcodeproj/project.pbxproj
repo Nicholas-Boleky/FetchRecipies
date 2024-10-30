@@ -171,9 +171,9 @@
 		01F668CA2CCEDA3600CFF5AB = {
 			isa = PBXGroup;
 			children = (
-				01F668D52CCEDA3600CFF5AB /* FetchRecipies */,
-				01F668E92CCEDA3900CFF5AB /* FetchRecipiesTests */,
-				01F668F32CCEDA3900CFF5AB /* FetchRecipiesUITests */,
+				01F668D52CCEDA3600CFF5AB /* FetchRecipes */,
+				01F668E92CCEDA3900CFF5AB /* FetchRecipesTests */,
+				01F668F32CCEDA3900CFF5AB /* FetchRecipesUITests */,
 				01F668D42CCEDA3600CFF5AB /* Products */,
 				01761FDA2CD19E62001791B3 /* Frameworks */,
 			);
@@ -189,7 +189,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		01F668D52CCEDA3600CFF5AB /* FetchRecipies */ = {
+		01F668D52CCEDA3600CFF5AB /* FetchRecipes */ = {
 			isa = PBXGroup;
 			children = (
 				0176201F2CD2A633001791B3 /* Utilities */,
@@ -202,24 +202,24 @@
 				01761FD82CD19C86001791B3 /* Assets.xcassets */,
 				01761FBA2CD048E3001791B3 /* Preview Content */,
 			);
-			path = FetchRecipies;
+			path = FetchRecipes;
 			sourceTree = "<group>";
 		};
-		01F668E92CCEDA3900CFF5AB /* FetchRecipiesTests */ = {
+		01F668E92CCEDA3900CFF5AB /* FetchRecipesTests */ = {
 			isa = PBXGroup;
 			children = (
 				01F668EA2CCEDA3900CFF5AB /* FetchRecipiesTests.swift */,
 			);
-			path = FetchRecipiesTests;
+			path = FetchRecipesTests;
 			sourceTree = "<group>";
 		};
-		01F668F32CCEDA3900CFF5AB /* FetchRecipiesUITests */ = {
+		01F668F32CCEDA3900CFF5AB /* FetchRecipesUITests */ = {
 			isa = PBXGroup;
 			children = (
 				01F668F42CCEDA3900CFF5AB /* FetchRecipiesUITests.swift */,
 				01F668F62CCEDA3900CFF5AB /* FetchRecipiesUITestsLaunchTests.swift */,
 			);
-			path = FetchRecipiesUITests;
+			path = FetchRecipesUITests;
 			sourceTree = "<group>";
 		};
 		01F6690B2CD011A500CFF5AB /* Models */ = {
@@ -537,10 +537,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = FetchRecipies/FetchRecipies.entitlements;
+				CODE_SIGN_ENTITLEMENTS = FetchRecipes/FetchRecipes.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"FetchRecipies/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"FetchRecipes/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -558,7 +558,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Boleky.FetchRecipies;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Boleky.FetchRecipes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -573,10 +573,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = FetchRecipies/FetchRecipies.entitlements;
+				CODE_SIGN_ENTITLEMENTS = FetchRecipes/FetchRecipes.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"FetchRecipies/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"FetchRecipes/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -594,7 +594,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Boleky.FetchRecipies;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Boleky.FetchRecipes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
