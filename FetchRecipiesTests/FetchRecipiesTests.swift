@@ -6,30 +6,78 @@
 //
 
 import XCTest
+@testable import FetchRecipies
 
-final class FetchRecipiesTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+final class RecipeListViewModelTests: XCTestCase {
+    
+    var viewModel: RecipeListViewModel!
+    
+    override func setUp() {
+        super.setUp()
+        viewModel = RecipeListViewModel()
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    override func tearDown() {
+        viewModel = nil
+        super.tearDown()
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func testSearchQueryFiltering() {
+        // Given: these are the recipe array
+        let recipes = [
+            Recipe(backendID: "", cuisine: "American", name: "Banana Pancakes", photoUrlLarge: URL(fileURLWithPath: ""), photoUrlSmall: URL(fileURLWithPath: ""), sourceUrl: URL(fileURLWithPath: ""), youtubeUrl: URL(fileURLWithPath: "")),
+            Recipe(backendID: "", cuisine: "British", name: "Apple & Blackberry Crumble", photoUrlLarge: URL(fileURLWithPath: ""), photoUrlSmall: URL(fileURLWithPath: ""), sourceUrl: URL(fileURLWithPath: ""), youtubeUrl: URL(fileURLWithPath: "")),
+            Recipe(backendID: "", cuisine: "Canadian", name: "Beaver Tails", photoUrlLarge: URL(fileURLWithPath: ""), photoUrlSmall: URL(fileURLWithPath: ""), sourceUrl: URL(fileURLWithPath: ""), youtubeUrl: URL(fileURLWithPath: ""))
+        ]
+        viewModel.allRecipes = recipes
+        
+        // When: User enters search query
+        viewModel.searchQuery = "Beaver"
+        viewModel.applyFilters()
+        // Then: filtered recipes show matching recipe
+        XCTAssertEqual(viewModel.recipes.count, 1)
+        XCTAssertEqual(viewModel.recipes.first?.name, "Beaver Tails")
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testCuisineFilteringIncludesSelected() {
+        // Given: these are the recipe array
+        let recipes = [
+            Recipe(backendID: "", cuisine: "American", name: "Banana Pancakes", photoUrlLarge: URL(fileURLWithPath: ""), photoUrlSmall: URL(fileURLWithPath: ""), sourceUrl: URL(fileURLWithPath: ""), youtubeUrl: URL(fileURLWithPath: "")),
+            Recipe(backendID: "", cuisine: "British", name: "Apple & Blackberry Crumble", photoUrlLarge: URL(fileURLWithPath: ""), photoUrlSmall: URL(fileURLWithPath: ""), sourceUrl: URL(fileURLWithPath: ""), youtubeUrl: URL(fileURLWithPath: "")),
+            Recipe(backendID: "", cuisine: "Canadian", name: "Beaver Tails", photoUrlLarge: URL(fileURLWithPath: ""), photoUrlSmall: URL(fileURLWithPath: ""), sourceUrl: URL(fileURLWithPath: ""), youtubeUrl: URL(fileURLWithPath: ""))
+        ]
+        viewModel.allRecipes = recipes
+        
+        // When: User selects cusilne filters
+        viewModel.selectedCuisines = ["American", "British"]
+        viewModel.applyFilters()
+        
+        // Then: Matching recipes are found
+        XCTAssertEqual(viewModel.recipes.count, 2)
+        XCTAssertTrue(viewModel.recipes.contains { $0.name == "Banana Pancakes" })
+        XCTAssertTrue(viewModel.recipes.contains { $0.name == "Apple & Blackberry Crumble" })
     }
-
+    
+    func testCuisineFilteringExcludesUnselected() {
+        // Given: these are the recipe array
+        let recipes = [
+            Recipe(backendID: "", cuisine: "American", name: "Banana Pancakes", photoUrlLarge: URL(fileURLWithPath: ""), photoUrlSmall: URL(fileURLWithPath: ""), sourceUrl: URL(fileURLWithPath: ""), youtubeUrl: URL(fileURLWithPath: "")),
+            Recipe(backendID: "", cuisine: "British", name: "Apple & Blackberry Crumble", photoUrlLarge: URL(fileURLWithPath: ""), photoUrlSmall: URL(fileURLWithPath: ""), sourceUrl: URL(fileURLWithPath: ""), youtubeUrl: URL(fileURLWithPath: "")),
+            Recipe(backendID: "", cuisine: "Canadian", name: "Beaver Tails", photoUrlLarge: URL(fileURLWithPath: ""), photoUrlSmall: URL(fileURLWithPath: ""), sourceUrl: URL(fileURLWithPath: ""), youtubeUrl: URL(fileURLWithPath: ""))
+        ]
+        viewModel.allRecipes = recipes
+        
+        // When: User toggles filter for cuisine
+        viewModel.toggleCuisine("American")
+        viewModel.applyFilters()
+        
+        // Then: Only the "American" recipes should be in the filtered list
+        XCTAssertEqual(viewModel.recipes.count, 1)
+        XCTAssertEqual(viewModel.recipes.first?.cuisine, "American")
+        XCTAssertEqual(viewModel.recipes.first?.name, "Banana Pancakes")
+        
+        // Verifes that other cuisines are not included in filtered recipes
+        XCTAssertFalse(viewModel.recipes.contains { $0.cuisine == "British" })
+        XCTAssertFalse(viewModel.recipes.contains { $0.cuisine == "Canadian" })
+    }
 }

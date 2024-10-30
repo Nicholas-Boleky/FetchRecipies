@@ -13,7 +13,7 @@ struct FetchRecipiesApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RecipeListView()
         }
     }
 }

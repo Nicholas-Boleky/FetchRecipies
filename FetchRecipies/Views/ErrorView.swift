@@ -19,6 +19,9 @@ struct ErrorView: View {
             Text(error.localizedDescription)
                 .multilineTextAlignment(.center)
                 .padding()
+            if error == .networkError(error) {
+                Text("Please check your connection and try again")
+            }
             Button(action: retryAction) {
                 Text("Try Again")
             }

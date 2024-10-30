@@ -9,7 +9,7 @@ import Foundation
 
 struct Recipe: Identifiable, Decodable, Equatable {
     // we will still generate a unique ID here on the mobile side mostly because I am not sure how the UUIDs on the backend are created/handled and if someone enters a duplicate by error it could cause issues for us on mobile.
-    let id = UUID()  // Generate a unique identifier
+    let id = UUID()
     let backendID: String
     let cuisine: String
     let name: String
