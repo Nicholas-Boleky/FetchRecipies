@@ -17,7 +17,7 @@ enum RecipeError: Error, LocalizedError, Identifiable, Equatable {
     var errorDescription: String? {
         switch self {
         case .malformedData:
-            return "Failed to load recipes, our servers are experiencing a temporary outage, please check back later."
+            return "Failed to load recipes, something doesn't look quite right, please check back later."
         case .emptyData:
             return "No recipes are available at the moment."
         case .networkError(let error):
